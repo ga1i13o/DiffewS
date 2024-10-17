@@ -79,12 +79,6 @@ class SINE(nn.Module):
         batched_ref_inputs = [item['ref_dict'] for item in batched_inputs]
         batched_tar_inputs = [item['tar_dict'] for item in batched_inputs]
 
-        # # prepare sam embeddings
-        # tar_sam_images = [x["sam_image"].to(self.device) for x in batched_tar_inputs]
-        # tar_sam_images = ImageList.from_tensors(tar_sam_images, size_divisibility=
-        #     self.segmenter.image_encoder.patch_embed.proj.kernel_size[0])
-        # sam_embeddings = self.get_sam_embs(tar_sam_images.tensor)
-
         # prepare dinov2 features
         ref_enc_images = [x["image"].to(self.device) for x in batched_ref_inputs]
         ref_enc_images = ImageList.from_tensors(ref_enc_images, size_divisibility=self.image_encoder.patch_size)
@@ -152,14 +146,6 @@ class SINE(nn.Module):
                 pred_ins_masks = output['pred_ins_masks']
                 processed_results.append({})
 
-                # if self.identity_on:
-                #     # labels = ref_id_labels
-                #     pred_logits = pred_id_logits
-                #     pred_masks = pred_id_masks
-                # else:
-                #     # labels = torch.cat([ref_id_labels, ref_ins_labels], dim=1)
-                #     pred_logits = torch.cat([pred_id_logits, pred_ins_logits], dim=1)
-                #     pred_masks = torch.cat([pred_id_masks, pred_ins_masks], dim=1)
 
                 # upsample masks
                 pred_id_masks = F.interpolate(
@@ -374,132 +360,3 @@ def build_model(args):
     )
 
     return model
-
-
-
-if __name__ == '__main__':
-
-    import argparse
-    from detectron2.data import transforms as T
-    import matplotlib.pyplot as plt
-    from tqdm import tqdm
-
-    from sine.data.dataset import HybridDataset
-
-    parser = argparse.ArgumentParser('SINE', add_help=False)
-    parser.add_argument('--random_flip', default="horizontal", type=str)
-    parser.add_argument('--min_scale', default=0.1, type=float)
-    parser.add_argument('--max_scale', default=2.0, type=float)
-    parser.add_argument('--image_size', default=896, type=int)
-    parser.add_argument('--sam_image_size', default=1024, type=int)
-    parser.add_argument('--feat_chans', default=256, type=int)
-    parser.add_argument('--image_enc_use_fc', action="store_true")
-
-    parser.add_argument('--dinov2-size', type=str, default="vit_large")
-    parser.add_argument('--dinov2-weights', type=str, default="models/dinov2_vitl14_pretrain.pth")
-    # parser.add_argument('--sam-weights', type=str, default="models/sam_vit_h_4b8939.pth")
-
-    # parser.add_argument('--model_mode', default='matchv1', type=str)
-    # parser.add_argument('--model_stage2_on', action="store_true")
-    # parser.set_defaults(model_stage2_on=True)
-    # parser.add_argument('--sam_input_mask_on', action="store_true")
-    # parser.add_argument('--transformer_mode', default='match_v1_abla_semsa', type=str)
-    parser.add_argument('--transformer_depth', default=6, type=int)
-    parser.add_argument('--transformer_nheads', default=8, type=int)
-    parser.add_argument('--transformer_mlp_dim', default=2048, type=int)
-    parser.add_argument('--transformer_mask_dim', default=256, type=int)
-    parser.add_argument('--transformer_fusion_layer_depth', default=1, type=int)
-    # parser.add_argument('--transformer_use_alpha', action="store_true")
-    # parser.add_argument('--transformer_use_gumbel_softmax_hard', action="store_true", default=False)
-    # parser.add_argument('--transformer_gumbel_softmax_tau', default=0.3, type=float)
-    parser.add_argument('--transformer_num_queries', default=200, type=int)
-    # parser.add_argument('--transformer_attn_ds_rate', default=2, type=int)
-    parser.add_argument("--transformer_pre_norm", action="store_true", default=True)
-
-    parser.add_argument('--class_weight', default=2.0, type=float)
-    parser.add_argument('--mask_weight', default=5.0, type=float)
-    parser.add_argument('--dice_weight', default=5.0, type=float)
-    parser.add_argument('--no_object_weight', default=0.1, type=float)
-    parser.add_argument('--train_num_points', default=12544, type=int)
-    parser.add_argument('--oversample_ratio', default=3.0, type=float)
-    parser.add_argument('--importance_sample_ratio', default=0.75, type=float)
-    parser.add_argument("--deep_supervision", action="store_true", default=True)
-    # evaluation
-    parser.add_argument('--score_threshold', default=0.8, type=float)
-
-    args = parser.parse_args()
-
-    # LSJ aug
-    augmentation = []
-    if args.random_flip != "none":
-        augmentation.append(
-            T.RandomFlip(
-                horizontal=args.random_flip == "horizontal",
-                vertical=args.random_flip == "vertical",
-            )
-        )
-
-    augmentation.extend([
-        T.ResizeScale(
-            min_scale=args.min_scale, max_scale=args.max_scale, target_height=args.image_size, target_width=args.image_size
-        ),
-        T.FixedSizeCrop(crop_size=(args.image_size, args.image_size), pad=False),
-    ])
-
-    dataset = HybridDataset(
-        image_size=args.image_size,
-        root='datasets',
-        crop_ratio=1.0,
-        samples_per_epoch=500 * 8 * 2 * 10,
-        dataset="pano_seg",
-        sample_rate=[1, ],
-        pano_seg_data="coco",
-        pano_sample_rate=[1, ],
-        tfm_gens_crop_pair=augmentation,
-        tfm_gens_sel_pair=augmentation,
-    )
-
-    sampler = torch.utils.data.SequentialSampler(dataset)
-
-
-    def trivial_batch_collator(batch):
-        """
-        A batch collator that does nothing.
-        """
-        return batch
-
-    loader = torch.utils.data.DataLoader(
-        dataset, sampler=sampler,
-        batch_size=2,
-        num_workers=4,
-        pin_memory=True,
-        drop_last=True,
-        collate_fn=trivial_batch_collator
-    )
-
-    model = build_model(args)
-    model.to('cuda')
-
-    # # from deepspeed.utils.zero_to_fp32 import get_fp32_state_dict_from_zero_checkpoint
-    # # state_dict = get_fp32_state_dict_from_zero_checkpoint('/home/yangliu/workspace/pycode/release/SINE/outputs/pt_sine')
-    # state_dict = torch.load('/home/yangliu/workspace/pycode/release/SINE/outputs/pt_sine/pytorch_model.bin', map_location="cpu")
-    # state_dict_model = model.state_dict()
-    #
-    # from collections import OrderedDict
-    # new_state_dict = OrderedDict()
-    # for weight_name in state_dict:
-    #     if 'segmenter' not in weight_name:
-    #         new_state_dict[weight_name] = state_dict[weight_name]
-    #
-    # for weight_name in new_state_dict:
-    #     if weight_name not in state_dict_model:
-    #         print(weight_name)
-    #
-    # msg = model.load_state_dict(new_state_dict)
-    # print(f"msg: {msg}")
-    # torch.save(new_state_dict, '/home/yangliu/workspace/pycode/release/SINE/outputs/pt_sine/pytorch_model_new.bin')
-
-    for inputs in loader:
-        losses = model(inputs)
-        loss = sum([v for k, v in losses.items()])
-        print(loss)
