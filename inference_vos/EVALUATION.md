@@ -7,7 +7,7 @@ Download datasets:
 
 > python -m scripts.download_datasets
 
-Create a directory 'datasets' for the above datasets in 'inference_fsod/' and appropriately place each dataset to have following directory structure:
+Create a directory 'datasets' for the above datasets and appropriately place each dataset to have following directory structure:
 
     datasets/
     ├── vos/
