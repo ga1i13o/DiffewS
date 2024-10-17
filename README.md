@@ -36,7 +36,7 @@ Our approach leverages a Transformer encoder-decoder structure, where the encode
 
 - [Training](TRAINING.md). 
 
-- DINOv2 model trained on ADE20K, COCO, and Objects365, [weight](https://drive.google.com/file/d/1GYQbbUZClbmhVESDLpRwqe-TyijW2kKb/view?usp=sharing).
+- DINOv2-L model trained on ADE20K, COCO, and Objects365, [weight](https://drive.google.com/file/d/1GYQbbUZClbmhVESDLpRwqe-TyijW2kKb/view?usp=sharing).
 
 - [Evaluation - Few-shot Semnatic Segmentation](inference_fss/EVALUATION.md)
 
