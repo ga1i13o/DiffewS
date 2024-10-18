@@ -1,12 +1,13 @@
 <div align="center">
 
-<h1>A Simple Image Segmentation Framework via In-Context Examples </h1>
+<h1>Unleashing the Potential of the Diffusion Model in Few-shot Semantic Segmentation</h1>
 
-[Yang Liu](https://scholar.google.com/citations?user=9JcQ2hwAAAAJ&hl=en)<sup>1</sup>, &nbsp; 
+[Muzhi Zhu](https://scholar.google.com/citations?user=064gBH4AAAAJ&hl=en)<sup>1*</sup>, &nbsp;
+[Yang Liu](https://scholar.google.com/citations?user=9JcQ2hwAAAAJ&hl=en)<sup>1*</sup>, &nbsp;
+Zekai Luo<sup>1*</sup>, &nbsp; 
 [Chenchen Jing](https://jingchenchen.github.io/)<sup>1</sup>, &nbsp;
-Hengtao Li<sup>1</sup>, &nbsp;
-[Muzhi Zhu](https://scholar.google.com/citations?user=064gBH4AAAAJ&hl=en)<sup>1</sup>, &nbsp;
 [Hao Chen](https://stan-haochen.github.io/)<sup>1</sup>, &nbsp;
+[Guangkai Xu](https://scholar.google.com.hk/citations?user=v35sbGEAAAAJ&hl=en)<sup>1</sup>, &nbsp;
 [Xinlong Wang](https://www.xloong.wang/)<sup>2</sup>, &nbsp;
 [Chunhua Shen](https://cshen.github.io/)<sup>1</sup>
 
@@ -19,18 +20,27 @@ NeurIPS 2024
 
 ## 🚀 Overview
 <div align="center">
-<img width="800" alt="image" src="figs/framework.png">
+<img width="800" alt="image" src="figs/method.png">
 </div>
 
 ## 📖 Description
 
-Recently, there have been explorations of generalist segmentation models that can effectively tackle a variety of image segmentation tasks within a unified in-context learning framework. 
-However, these methods still struggle with task ambiguity in in-context segmentation, as not all in-context examples can accurately convey the task information. 
-In order to address this issue, we present SINE, a simple image **S**egmentation framework utilizing **in**-context **e**xamples. 
-Our approach leverages a Transformer encoder-decoder structure, where the encoder provides high-quality image representations, and the decoder is designed to yield multiple task-specific output masks to effectively eliminate task ambiguity.
+We systematically study four crucial elements of applying the Diffusion Model to Few-shot
+Semantic Segmentation. For each of these aspects, we propose several reasonable solutions
+and validate them through comprehensive experiments.
 
-[Paper](https://arxiv.org/abs/2410.04842)
+Building upon our observations, we establish the DiffewS framework, which maximally
+retains the generative framework and effectively utilizes the pre-training prior. Notably, we
+introduce the first diffusion-based model dedicated to Few-shot Semantic Segmentation,
+setting the groundwork for a diffusion-based generalist segmentation model.
 
+[Paper](https://arxiv.org/abs/2410.02369)
+
+## 🚩 Plan
+- [x] Release the weights.
+- [x] Release the inference code.
+- [ ] Release the training code.
+<!-- --- -->
 
 ## 👻 Getting Started
 
