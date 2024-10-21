@@ -53,7 +53,7 @@ For academic use, this project is licensed under [the 2-clause BSD License](LICE
 ## 🖊️ Citation
 
 
-If you find this project useful in your research, please consider cite:
+If you find this project useful in your research, please consider to cite:
 
 
 ```BibTeX
