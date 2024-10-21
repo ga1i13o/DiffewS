@@ -48,7 +48,7 @@ Our approach leverages a Transformer encoder-decoder structure, where the encode
 
 ## 🎫 License
 
-For academic use, this project is licensed under [the 2-clause BSD License](LICENSE). For commercial use, please contact [Chunhua Shen](chhshen@gmail.com).
+For academic use, this project is licensed under [the 2-clause BSD License](LICENSE). For commercial use, please contact [Chunhua Shen](mailto:chhshen@gmail.com).
 
 ## 🖊️ Citation
 
@@ -60,7 +60,7 @@ If you find this project useful in your research, please consider cite:
 @article{liu2024simple,
   title={A Simple Image Segmentation Framework via In-Context Examples},
   author={Liu, Yang and Jing, Chenchen and Li, Hengtao and Zhu, Muzhi and Chen, Hao and Wang, Xinlong and Shen, Chunhua},
-  journal={arXiv preprint arXiv:2410.04842},
+  journal={Proc. Int. Conference on Neural Information Processing Systems (NeurIPS)},
   year={2024}
 }
 ```
