@@ -37,23 +37,24 @@ setting the groundwork for a diffusion-based generalist segmentation model.
 [Paper](https://arxiv.org/abs/2410.02369)
 
 ## 🚩 Plan
-- [x] Release the weights.
-- [x] Release the inference code.
+- [ ] Release the weights.
+- [ ] Release the inference code.
 - [ ] Release the training code.
 <!-- --- -->
 
 ## 👻 Getting Started
 
-- [Training](TRAINING.md). 
+### Installation
+Preparing the environment following [GenPercept](https://github.com/aim-uofa/GenPercept?tab=readme-ov-file).
 
-- DINOv2-L model trained on ADE20K, COCO, and Objects365, [weight](https://drive.google.com/file/d/1GYQbbUZClbmhVESDLpRwqe-TyijW2kKb/view?usp=sharing).
+### Dataset
+Preparing the dataset following [Matcher](https://github.com/aim-uofa/Matcher/blob/main/datasets/README.md)
 
-- [Evaluation - Few-shot Semnatic Segmentation](inference_fss/EVALUATION.md)
+### Training
 
-- [Evaluation - Few-shot Instance Segmentation](inference_fsod/EVALUATION.md)
+### Evaluation
 
-- [Evaluation - Video Object Segmentation](inference_vos/EVALUATION.md)
-
+Download the pre-trained model weights from [here](). 
 
 
 ## 🎫 License
@@ -67,13 +68,13 @@ If you find this project useful in your research, please consider cite:
 
 
 ```BibTeX
-@article{liu2024simple,
-  title={A Simple Image Segmentation Framework via In-Context Examples},
-  author={Liu, Yang and Jing, Chenchen and Li, Hengtao and Zhu, Muzhi and Chen, Hao and Wang, Xinlong and Shen, Chunhua},
-  journal={arXiv preprint arXiv:2410.04842},
+@article{zhu2024unleashing,
+  title={Unleashing the Potential of the Diffusion Model in Few-shot Semantic Segmentation},
+  author={Zhu, Muzhi and Liu, Yang and Luo, Zekai and Jing, Chenchen and Chen, Hao and Xu, Guangkai and Wang, Xinlong and Shen, Chunhua},
+  journal={arXiv preprint arXiv:2410.02369},
   year={2024}
 }
 ```
 
 ## Acknowledgement
-[DINOv2](https://github.com/facebookresearch/dinov2), [Mask2Former](https://github.com/facebookresearch/Mask2Former), [SegGPT](https://github.com/baaivision/Painter/tree/main/SegGPT), [Matcher](https://github.com/aim-uofa/Matcher), [TFA](https://github.com/ucbdrive/few-shot-object-detection) and [detectron2](https://github.com/facebookresearch/detectron2).
+[SegGPT](https://github.com/baaivision/Painter/tree/main/SegGPT), [Matcher](https://github.com/aim-uofa/Matcher), [GenPercept](https://github.com/aim-uofa/GenPercept?tab=readme-ov-file)
