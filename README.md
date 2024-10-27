@@ -59,12 +59,12 @@ Download the pre-trained model weights from [here]().
 
 ## 🎫 License
 
-For academic use, this project is licensed under [the 2-clause BSD License](LICENSE). For commercial use, please contact [Chunhua Shen](chhshen@gmail.com).
+For academic use, this project is licensed under [the 2-clause BSD License](LICENSE). For commercial use, please contact [Chunhua Shen](mailto:chhshen@gmail.com).
 
 ## 🖊️ Citation
 
 
-If you find this project useful in your research, please consider cite:
+If you find this project useful in your research, please consider to cite:
 
 
 ```BibTeX
