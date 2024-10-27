@@ -77,4 +77,4 @@ If you find this project useful in your research, please consider to cite:
 ```
 
 ## Acknowledgement
-[SegGPT](https://github.com/baaivision/Painter/tree/main/SegGPT), [Matcher](https://github.com/aim-uofa/Matcher), [GenPercept](https://github.com/aim-uofa/GenPercept?tab=readme-ov-file)
+[SegGPT](https://github.com/baaivision/Painter/tree/main/SegGPT), [Matcher](https://github.com/aim-uofa/Matcher), [Marigold](https://github.com/prs-eth/Marigold), [GenPercept](https://github.com/aim-uofa/GenPercept?tab=readme-ov-file)
