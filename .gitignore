@@ -42,3 +42,6 @@ outputs/
 **/outputs/
 models/
 **/models/
+weight/
+FSSBench
+logs

@@ -37,8 +37,9 @@ setting the groundwork for a diffusion-based generalist segmentation model.
 [Paper](https://arxiv.org/abs/2410.02369)
 
 ## 🚩 Plan
-- [ ] Release the weights.
-- [ ] Release the inference code.
+<!-- - [ ] Release the weights. -->
+- [x] Release the weights.
+- [x] Release the inference code.
 - [ ] Release the training code.
 <!-- --- -->
 
@@ -47,6 +48,14 @@ setting the groundwork for a diffusion-based generalist segmentation model.
 ### Installation
 Preparing the environment following [GenPercept](https://github.com/aim-uofa/GenPercept?tab=readme-ov-file).
 
+
+```bash
+conda create -n diffews python=3.10
+conda activate diffews
+pip install -r requirements.txt
+python -m pip install 'git+https://github.com/facebookresearch/detectron2.git'
+```
+
 ### Dataset
 Preparing the dataset following [Matcher](https://github.com/aim-uofa/Matcher/blob/main/datasets/README.md)
 
@@ -54,8 +63,11 @@ Preparing the dataset following [Matcher](https://github.com/aim-uofa/Matcher/bl
 
 ### Evaluation
 
-Download the pre-trained model weights from [here](). 
-
+Download the pre-trained model weights from [here](https://www.modelscope.cn/zzzmmz/Diffews.git). 
+```bash
+CUDA_VISIBLE_DEVICES=0 bash  scripts/eval_coco2014_rthres_1shot_nosample.sh weight/coco_fold0
+CUDA_VISIBLE_DEVICES=0 bash  scripts/eval_coco2014_rthres_5shot_nosample.sh weight/coco_fold0
+```
 
 ## 🎫 License
 
