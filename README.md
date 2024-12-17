@@ -58,7 +58,9 @@ python -m pip install 'git+https://github.com/facebookresearch/detectron2.git'
 
 ### Dataset
 Preparing the dataset following [Matcher](https://github.com/aim-uofa/Matcher/blob/main/datasets/README.md)
+You only need to download the COCO dataset.
 
+```bash
 ### Training
 
 ### Evaluation
