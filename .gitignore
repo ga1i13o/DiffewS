@@ -45,3 +45,4 @@ models/
 weight/
 FSSBench
 logs
+!diffews/models

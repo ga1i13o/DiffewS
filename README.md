@@ -67,6 +67,7 @@ Download the pre-trained model weights from [here](https://www.modelscope.cn/zzz
 ```bash
 CUDA_VISIBLE_DEVICES=0 bash  scripts/eval_coco2014_rthres_1shot_nosample.sh weight/coco_fold0
 CUDA_VISIBLE_DEVICES=0 bash  scripts/eval_coco2014_rthres_5shot_nosample.sh weight/coco_fold0
+CUDA_VISIBLE_DEVICES=0 bash  scripts/eval_coco2014_rthres_1shot_nosample_fold0.sh weight/incontext
 ```
 
 ## 🎫 License
