@@ -46,3 +46,4 @@ weight/
 FSSBench
 logs
 !diffews/models
+!marigold/models
