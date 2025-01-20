@@ -44,6 +44,7 @@ models/
 **/models/
 weight/
 FSSBench
-logs
+logs*
 !diffews/models
 !marigold/models
+cache
