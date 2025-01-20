@@ -62,6 +62,10 @@ You only need to download the COCO 2014 dataset.
 
 ### Training
 
+This script is tested on single 24G 4090.
+```bash
+bash scripts/train_cocofold0_4090_nocrop_lr1_nearest_fold1_7shot_ori_v3.sh
+```
 ### Evaluation
 
 Download the pre-trained model weights from [here](https://www.modelscope.cn/zzzmmz/Diffews.git). 
