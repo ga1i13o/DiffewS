@@ -40,7 +40,7 @@ setting the groundwork for a diffusion-based generalist segmentation model.
 <!-- - [ ] Release the weights. -->
 - [x] Release the weights.
 - [x] Release the inference code.
-- [ ] Release the training code.
+- [x] Release the training code.
 <!-- --- -->
 
 ## 👻 Getting Started
