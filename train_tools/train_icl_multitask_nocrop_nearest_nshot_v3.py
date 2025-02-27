@@ -955,6 +955,12 @@ def parse_args():
         default=1,
         help="timesteps for training",
     )
+    parser.add_argument(
+        "--benchmark",
+        type=str,
+        default='coco',
+        help="",
+    )
 
     parser.add_argument(
         "--nshot",
@@ -1187,7 +1193,7 @@ def main():
         eps=args.adam_epsilon,
     )
 
-    args.benchmark = 'coco'
+    #args.benchmark = 'coco'
     args.datapath = args.train_data_dir
     args.use_original_imgsize = False
     #args.nshot = 2

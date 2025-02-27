@@ -9,16 +9,17 @@ gas=4 # bs = 8 * bs * gas
 step=20000
 task=v3
 fold=3
-shot=2
+shot=1
 output_dir=./logs_v3/icl_coco_fold${fold}_res${res}_lr${lr}_wr${wr}_step${step}_bs${bs}_gas${gas}_gpu2_nearest_seed${seed}_shot${shot}
 
 echo ${output_dir}
 
 for fold in 0 ; do
-CUDA_VISIBLE_DEVICES='0'  accelerate launch --num_processes 1 --main_process_port 1234 --mixed_precision "fp16" --num_machines 1 \
+CUDA_VISIBLE_DEVICES='1'  accelerate launch --num_processes 1 --main_process_port 1234 --mixed_precision "fp16" --num_machines 1 \
 train_tools/train_icl_multitask_nocrop_nearest_nshot_v3.py \
  --mixed_precision="fp16" \
  --train_batch_size=${bs} \
+ --benchmark='lvis' \
  --checkpointing_steps 2000 \
  --pretrained_model_name_or_path="/home/gtrivigno/.cache/modelscope/hub/models/zzzmmz/Diffews/weight/stable-diffusion-2-1-ref8inchannels-tag4inchannels" \
  --output_dir=${output_dir} \

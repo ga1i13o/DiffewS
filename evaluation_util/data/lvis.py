@@ -71,6 +71,8 @@ class DatasetLVIS(Dataset):
             val_anno = pickle.load(f)
 
         train_cat_ids = list(train_anno.keys())
+        # below: keep only classes with > 1 sample
+        train_cat_ids = [i for i in list(train_anno.keys()) if len(train_anno[i]) > self.shot]
         val_cat_ids = [i for i in list(val_anno.keys()) if len(val_anno[i]) > self.shot]
 
         trn_nclass = len(train_cat_ids)
