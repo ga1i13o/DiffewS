@@ -1455,28 +1455,28 @@ def main():
                 break
 
             # if accelerator.is_main_process:
-            if args.validation_images is not None and global_step % args.validation_steps == 0:
-                if args.use_ema:
-                    # Store the UNet parameters temporarily and load the EMA parameters to perform inference.
-                    ema_unet.store(unet.parameters())
-                    ema_unet.copy_to(unet.parameters())
-                eval_results_all = log_validation(
-                    vae,
-                    noise_scheduler_ddim,
-                    text_encoder,
-                    tokenizer,
-                    unet,
-                    args,
-                    accelerator,
-                    weight_dtype,
-                    global_step,
-                    test_dataloader_list,
-                    dam,
-                    dataset_list,
-                )
-                if args.use_ema:
-                    # Switch back to the original UNet parameters.
-                    ema_unet.restore(unet.parameters())
+            # if args.validation_images is not None and global_step % args.validation_steps == 0:
+            #     if args.use_ema:
+            #         # Store the UNet parameters temporarily and load the EMA parameters to perform inference.
+            #         ema_unet.store(unet.parameters())
+            #         ema_unet.copy_to(unet.parameters())
+            #     eval_results_all = log_validation(
+            #         vae,
+            #         noise_scheduler_ddim,
+            #         text_encoder,
+            #         tokenizer,
+            #         unet,
+            #         args,
+            #         accelerator,
+            #         weight_dtype,
+            #         global_step,
+            #         test_dataloader_list,
+            #         dam,
+            #         dataset_list,
+            #     )
+            #     if args.use_ema:
+            #         # Switch back to the original UNet parameters.
+            #         ema_unet.restore(unet.parameters())
 
     # Create the pipeline using the trained modules and save it.
     accelerator.wait_for_everyone()
@@ -1485,32 +1485,32 @@ def main():
         if args.use_ema:
             ema_unet.copy_to(unet.parameters())
 
-        pipeline = MarigoldPipelineRGBLatentNoise.from_pretrained(
-            args.pretrained_model_name_or_path,
-            text_encoder=text_encoder,
-            vae=vae,
-            unet=unet,
-            revision=args.revision,
-            variant=args.variant,
-        )
-        pipeline.save_pretrained(args.output_dir)
+        # pipeline = MarigoldPipelineRGBLatentNoise.from_pretrained(
+        #     args.pretrained_model_name_or_path,
+        #     text_encoder=text_encoder,
+        #     vae=vae,
+        #     unet=unet,
+        #     revision=args.revision,
+        #     variant=args.variant,
+        # )
+        # pipeline.save_pretrained(args.output_dir)
 
-        # Run a final round of inference.
-        images = []
-        if args.validation_prompts is not None:
-            logger.info("Running inference for collecting generated images...")
+        # # Run a final round of inference.
+        # images = []
+        # if args.validation_prompts is not None:
+        #     logger.info("Running inference for collecting generated images...")
 
-            logger.info("Not implement, pass")
-            pass
+        #     logger.info("Not implement, pass")
+        #     pass
 
-        if args.push_to_hub:
-            save_model_card(args, repo_id, images, repo_folder=args.output_dir)
-            upload_folder(
-                repo_id=repo_id,
-                folder_path=args.output_dir,
-                commit_message="End of training",
-                ignore_patterns=["step_*", "epoch_*"],
-            )
+        # if args.push_to_hub:
+        #     save_model_card(args, repo_id, images, repo_folder=args.output_dir)
+        #     upload_folder(
+        #         repo_id=repo_id,
+        #         folder_path=args.output_dir,
+        #         commit_message="End of training",
+        #         ignore_patterns=["step_*", "epoch_*"],
+        #     )
 
     accelerator.end_training()
 
