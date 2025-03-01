@@ -19,7 +19,7 @@ python evaluation_util/main_oss.py \
  --checkpoint /home/gtrivigno/.cache/modelscope/hub/models/zzzmmz/Diffews/weight/stable-diffusion-2-1-ref8inchannels-tag4inchannels \
  --unet_ckpt_path $MODEL_DIR/unet \
  --datapath /data/datasets \
- --benchmark 'coco' \
+ --benchmark 'pascal_cd' \
  --img-size 512 \
   --ensemble_size 1 \
  --bsz 1 \

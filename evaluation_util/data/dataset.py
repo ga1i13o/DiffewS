@@ -8,9 +8,10 @@ from .fss import DatasetFSS
 from .paco_part import DatasetPACOPart
 from .pascal_part import DatasetPASCALPart
 from .lvis import DatasetLVIS
+from .pascal_voc_cd import DatasetPASCALCD
+
 
 class FSSDataset:
-
     @classmethod
     def initialize(cls, img_size, datapath, use_original_imgsize):
 
@@ -21,6 +22,7 @@ class FSSDataset:
             'paco_part': DatasetPACOPart,
             'pascal_part': DatasetPASCALPart,
             'lvis': DatasetLVIS,
+            'pascal_cd': DatasetPASCALCD,
         }
 
         cls.datapath = datapath

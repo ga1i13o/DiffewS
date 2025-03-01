@@ -168,7 +168,7 @@ if __name__ == '__main__':
     # Dataset parameters
     parser.add_argument('--datapath', type=str, default='datasets')
     parser.add_argument('--benchmark', type=str, default='coco',
-                        choices=['fss', 'coco', 'pascal', 'lvis', 'paco_part', 'pascal_part'])
+                        choices=['fss', 'coco', 'pascal', 'lvis', 'paco_part', 'pascal_part', 'pascal_cd'])
     parser.add_argument('--bsz', type=int, default=1)
     parser.add_argument('--nworker', type=int, default=0)
     parser.add_argument('--fold', type=int, default=0)
