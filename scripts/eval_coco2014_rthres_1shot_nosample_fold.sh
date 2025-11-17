@@ -1,18 +1,15 @@
 export PYTHONPATH=./
 TIME=$(date "+%Y%m%d_%H_%M_%S")
 
-THRESHOLD=0.1
 NSHOT=1
 FOLD=0
-ITER=14000
-
 export MODEL_DIR=$1
 # export MODEL_NAME=$(basename "$MODEL_DIR")
 export MODEL_NAME="unet"
 echo $MODEL_NAME
 # FOLD=$2
-for THRESHOLD in 0.25; do
-OUTPUT_DIR="./logs/icl_seg_eval_${ITER}/${MODEL_NAME}/rthreshold${THRESHOLD}_${NSHOT}shot_fold${FOLD}_iter${ITER}_concat-kv_ns"
+#OUTPUT_DIR="./logs/icl_seg_eval_${ITER}/${MODEL_NAME}/rthreshold${THRESHOLD}_${NSHOT}shot_fold${FOLD}_iter${ITER}_concat-kv_ns"
+OUTPUT_DIR=".logs/eval_PT
 python evaluation_util/main_oss.py \
  --log-root $OUTPUT_DIR \
  --denoise_steps 1 \
@@ -27,8 +24,7 @@ python evaluation_util/main_oss.py \
  --nshot $NSHOT \
  --fold $FOLD \
  --threshold 0 \
- --r_threshold $THRESHOLD 
-done
+ --r_threshold 0.25
 
 
 # CUDA_VISIBLE_DEVICES=5 bash  scripts/eval_coco2014_rthres_1shot_nosample.sh weight/coco_fold0

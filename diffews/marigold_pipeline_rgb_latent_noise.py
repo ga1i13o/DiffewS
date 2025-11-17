@@ -406,7 +406,7 @@ class MarigoldPipelineRGBLatentNoise(DiffusionPipeline):
                 dtype=self.dtype,
             )
         
-        print('_bs :', _bs)
+        #print('_bs :', _bs)
 
         single_rgb_loader = DataLoader(
             single_rgb_dataset, batch_size=_bs, shuffle=False

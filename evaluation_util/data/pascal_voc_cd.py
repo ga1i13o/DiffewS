@@ -58,11 +58,9 @@ class DatasetPASCALCD(Dataset):
         batch = {'query_img': query_img,
                  'query_mask': query_mask,
                  'query_name': query_name,
-                 'query_ignore_idx': query_ignore_idx,
-                    "rgb_path": os.path.join(self.img_path, query_name) + '.jpg', # TODO delete rgb_path?
-
+                #  'query_ignore_idx': query_ignore_idx,
+                "rgb_path": os.path.join(self.img_path, query_name) + '.jpg', # TODO delete rgb_path?
                  'org_query_imsize': org_qry_imsize,
-
                  'support_imgs': support_imgs,
                  'support_masks': support_masks,
                  'support_names': support_names,
@@ -112,8 +110,8 @@ class DatasetPASCALCD(Dataset):
 
     def build_class_ids(self):
         nclass_trn = self.nclass // self.nfolds
-        class_ids_val = self.fold_classes[self.fold]        
-        class_ids_val = [self.fold * nclass_trn + i for i in range(nclass_trn)]
+        class_ids_val = [x-1 for x in self.fold_classes[self.fold]]      
+        # class_ids_val = [self.fold * nclass_trn + i for i in range(nclass_trn)]
         class_ids_trn = [x for x in range(self.nclass) if x not in class_ids_val]
 
         if self.split == 'trn':

@@ -138,11 +138,22 @@ def test_diffusion(pipe, dataloader, args=None):
         
         assert pred_mask.size() == batch['query_mask'].size(), \
             'pred {} ori {}'.format(pred_mask.size(), batch['query_mask'].size())
-
+        import matplotlib.pyplot as plt
+        import torchvision.transforms as TF
+        from os.path import join
+        # fig, ax = plt.subplots(1, 2)
+        # pred_fig = TF.functional.to_pil_image(pred_mask)
+        # q_m = TF.functional.to_pil_image(query_mask)
+        # ax[0].imshow(q_m)        
+        # ax[1].imshow(pred_fig)
+        # os.makedirs('viz_CD', exist_ok=True)
+        # plt.savefig(join('viz_CD', f'im_{idx}.png'))
+        # plt.close()        
         # 3. Evaluate prediction
         area_inter, area_union = Evaluator.classify_prediction(pred_mask.clone(), batch)
+        # print(area_inter, area_union)
         average_meter.update(area_inter, area_union, batch['class_id'], loss=None)
-        average_meter.write_process(idx, len(dataloader), epoch=-1, write_batch_idx=1)
+        average_meter.write_process(idx, len(dataloader), epoch=-1, write_batch_idx=50)
 
         # Visualize predictions
         if Visualizer.visualize:
